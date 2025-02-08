@@ -1,13 +1,21 @@
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
+
+#include "Player.h"
+#include "Bullet.h"
 
 class Game
 {
 private:
 	bool _endGame;
+	bool _mouseHeld;
+
+	// Resources
+	std::map<std::string, sf::Texture> _textures;
+	std::vector<Bullet> _bulletsVector;
+
+	// Player
+	Player* _player;
+	float _playerDirX, _playerDirY;
 
 	// Window variables
 	sf::RenderWindow* _window;
@@ -17,6 +25,8 @@ private:
 	// Init functions
 	void _initVariables();
 	void _initWindow();
+	void _initTextures();
+	void _initPlayer();
 public:
 	// Con/Des
 	Game();
@@ -26,6 +36,11 @@ public:
 
 	// Functions
 	void _run();
+
+	void _updatePollEvents();
+	void _updateInputs();
+
+	void _updateBullets();
 	void _update();
 	void _render();
 };
